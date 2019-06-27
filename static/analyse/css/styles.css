@@ -1,0 +1,18 @@
+#input_sentence form
+{
+  padding-top: 150px;
+  margin: auto;
+}
+#footer
+{
+  color: white;
+  position: fixed;
+  background-color: #343a40;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+}
+.last
+{
+  padding-bottom: 50px;
+}

@@ -1,0 +1,68 @@
+{% extends 'analyse/base.html' %}
+{% block header %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data1 = google.visualization.arrayToDataTable({{ score|safe }} );
+            var data2 = google.visualization.arrayToDataTable({{ freqWords|safe }} );
+            var options1 = {
+                legend: {position: 'bottom', alignment: 'center', maxLines: 3},
+                slices: {
+                    0: { color: '#2e4161' },
+                    1: { color: '#8c153d' },
+                    2: { color: '#828c15' },
+                }
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            var chart1 = new google.visualization.BarChart(document.getElementById('barchart'));
+            chart.draw(data1,options1);
+            chart1.draw(data2)
+        }
+        $(window).resize(function(){        //to make chart Responsive
+            drawChart();
+        });
+    </script>
+{% endblock header %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+      <div class="col s12 m12 l12" >
+          <div id="piechart" style="width: 100%; min-height: 450px;"></div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col s12 m12 l12" >
+          <div id="barchart" style="width: 100%; min-height: 450px;"></div>
+      </div>
+  </div>
+
+  <div class="row">
+    <h5>List of tokenized words:</h5>
+    <br>
+    <ul>
+    {% for word in word_List %}
+      <li>{{word}}</li>
+    {% endfor %}
+    </ul>
+  </div>
+
+  <div class="row">
+    <h5>Sentence after removing stop words:</h5>
+    <p>{{no_stop_words}}</p>
+  </div>
+
+  <div class="row last">
+    <h5>List of POS tagged words:</h5>
+    <br>
+    <ul>
+    {% for pair in pos_tagged %}
+      <li>{{pair.0}} : {{pair.1}}</li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

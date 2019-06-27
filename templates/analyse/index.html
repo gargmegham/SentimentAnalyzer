@@ -1,0 +1,15 @@
+{% extends 'analyse/base.html' %}
+{% block body %}
+      <br>
+      <div class="container">
+        <div id="input_sentence" class="row">
+          <form method="get" action="{% url 'analyse' %} ">
+            <div class="form-group">
+              <label for="input_sentence">Input sentence</label>
+              {{ input_sentence.q }}
+              <small id="emailHelp" class="form-text text-muted">We'll never share your phrase with anyone else.</small>
+            <button type="submit" class="btn btn-lg btn-primary mb-2 mt-3">Analyse</button>
+          </form>
+        </div>
+      </div>
+{% endblock body %}
