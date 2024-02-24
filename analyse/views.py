@@ -17,7 +17,6 @@ def analyse(request):
         no_stop_words = sentiment_analyser.Removing_Stopwords(word_List)
         score = sentiment_analyser.sentiment_analyzer_scores(no_stop_words)
         data_dump = json.dumps(dict({'':input_sentence}))
-        print(data_dump)
         with open('phrase.json', 'w') as json_file:
             json.dump(data_dump, json_file)
         pos_tagged = sentiment_analyser.pos_tagging(word_List)
